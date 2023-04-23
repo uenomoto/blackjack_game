@@ -1,5 +1,3 @@
-require './card'
-
 # トランプの山札を表現するクラスです。山札の作成、シャッフル、カードを引く機能がある
 class DeckOfCards
   SUITS = %w[ハート ダイヤ クラブ スペード].freeze # 定数は変更は望まないため、凍結で変更不可能（immutable）な配列にしてます

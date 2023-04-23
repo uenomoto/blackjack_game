@@ -1,7 +1,3 @@
-require './deck_of_cards'
-require './player'
-require './dealer'
-
 # ブラックジャックのゲーム全体を制御するクラスです。プレイヤーとディーラーのターン、結果の表示などを管理
 class Game
   # 山札、プレイヤー、ディーラーの初期化

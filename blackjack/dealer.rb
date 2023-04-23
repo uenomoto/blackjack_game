@@ -1,5 +1,3 @@
-require './player'
-
 #  ディーラーを表現するクラスで、Player クラスを継承、2枚目のカードを隠す機能を追加。
 class Dealer < Player
   # 直接handクラスにアクセスするのを防ぐためディーラークラスでカプセル化

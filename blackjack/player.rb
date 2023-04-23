@@ -1,5 +1,3 @@
-require './hand'
-
 # ブラックジャックのプレイヤーを表現するクラスです。手札を持つ
 class Player
   attr_reader :hand
