@@ -8,14 +8,14 @@ class Game
     @deck = DeckOfCards.new
     player_name = input_name # 初期化するたびにinput_nameメソッドが呼ばれる。
     @player = Player.new(name: player_name)
-    @dealer = Dealer.new(name: 'デーラー')
+    @dealer = Dealer.new
   end
 
   # ゲーム開始時、プレイヤーとディーラーが2枚ずつカードを引く,playで開始
   def start
     2.times do
       @player.hand.add_card(@deck.draw_card)
-      @dealer.hand.add_card(@deck.draw_card)
+      @dealer.add_card(@deck.draw_card)
     end
     play
   end

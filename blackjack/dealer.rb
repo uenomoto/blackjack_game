@@ -1,5 +1,9 @@
 #  ディーラーを表現するクラスで、Player クラスを継承
 class Dealer < Player
+  def initialize(name: 'デフォルトデーラー')
+    super
+  end
+  
   # 直接handクラスにアクセスするのを防ぐためディーラークラスでカプセル化
   def firest_card
     @hand.cards[0]
