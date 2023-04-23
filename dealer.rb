@@ -22,10 +22,8 @@ class Dealer < Player
   def hidden_hand
     # ２枚目のカードを隠した手札を作成する
     hidden_card = Card.new('', '')
-    Hand.new.tap do |hand|
-      hand.add_card(firest_card)
-      hand.add_card(hidden_card)
-    end
+    @hand.add_card(firest_card)
+    @hand.add_card(hidden_card)
   end
 end
 
