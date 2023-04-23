@@ -1,11 +1,8 @@
 # トランプの山札を表現するクラスです。山札の作成、シャッフル、カードを引く機能がある
 class DeckOfCards
-  SUITS = %w[ハート ダイヤ クラブ スペード].freeze # 定数は変更は望まないため、凍結で変更不可能（immutable）な配列にしてます
-  NUMBERS = (2..10).to_a + %w[A J Q K].freeze # to_aメソッドは今回の場合2~10の配列が入ってる
-
   # 山札を作成しシャッフルする
   def initialize
-    @cards = SUITS.product(NUMBERS).map { |suit, number| Card.new(suit, number) }
+    @cards = Card::SUITS.product(Card::NUMBERS).map { |suit, number| Card.new(suit, number) }
     shuffle
   end
 
@@ -21,7 +18,8 @@ class DeckOfCards
 end
 
 # 山札クラスを初期化しインスタンス作成した時にカードクラスからスートとナンバー属性を持ってきて１枚ずつカードを作ってる
-# イメージとしてはカードクラスから白紙のトランプを持ってきてスートとナンバーを書く欄がありここの初期化でそれぞれ１枚ずつ書いているイメージ
+# イメージとしてはカードクラスから白紙のトランプを持ってきてスートとナンバーを書く欄があり
+# 山札クラスの初期化でそれぞれ１枚ずつ書いているイメージ
 
 # リファクダ前
 # SUITS.each do |suit|
