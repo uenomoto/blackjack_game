@@ -18,13 +18,6 @@ class Dealer < Player
   def add_card(card)
     @hand.add_card(card)
   end
-
-  def hidden_hand
-    # ２枚目のカードを隠した手札を作成する
-    hidden_card = Card.new('', '')
-    @hand.add_card(firest_card)
-    @hand.add_card(hidden_card)
-  end
 end
 
 # 複雑なのでここでまとめさせてください
