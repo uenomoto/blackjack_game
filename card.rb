@@ -1,3 +1,4 @@
+# トランプのカードを表現するクラスです。スートと番号を持ち、メソッドで文字列表現にしている。
 class Card
   attr_reader :suit, :number
 

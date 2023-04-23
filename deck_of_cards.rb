@@ -1,8 +1,9 @@
 require './card'
 
+# トランプの山札を表現するクラスです。山札の作成、シャッフル、カードを引く機能がある
 class DeckOfCards
-  SUITS = ['ハート', 'ダイヤ', 'クラブ', 'スペード']
-  NUMBERS = ['A'] + (2..10).to_a + ['J', 'Q', 'K']
+  SUITS = %w[ハート ダイヤ クラブ スペード].freeze # 定数は変更は望まないため、凍結で変更不可能（immutable）な配列にしてます
+  NUMBERS = (2..10).to_a + %w[A J Q K]
 
   def initialize
     # 山札を作成しシャッフルする
@@ -10,13 +11,13 @@ class DeckOfCards
     shuffle
   end
 
+  # 山札の一番上のカードを引く
   def draw_card
-    # 山札の一番上のカードを引く
     @cards.pop
   end
 
+  # 山札をシャッフルする
   def shuffle
-    # 山札をシャッフルする
     @cards.shuffle!
   end
 end
