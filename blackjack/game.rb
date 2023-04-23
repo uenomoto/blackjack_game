@@ -6,8 +6,9 @@ class Game
   # 山札、プレイヤー、ディーラーの初期化
   def initialize
     @deck = DeckOfCards.new
-    @player = Player.new
-    @dealer = Dealer.new
+    player_name = input_name # 初期化するたびにinput_nameメソッドが呼ばれる。
+    @player = Player.new(name: player_name)
+    @dealer = Dealer.new(name: 'デーラー')
   end
 
   # ゲーム開始時、プレイヤーとディーラーが2枚ずつカードを引く,playで開始
@@ -34,16 +35,16 @@ class Game
   # 初期カードを表示する
   def show_initial_cards
     @player.hand.cards.each do |card|
-      puts "あなたの引いたカードは#{card}です。"
+      puts "#{@player.name}の引いたカードは#{card}です。"
     end
-    puts "ディーラーの引いたカードは#{@dealer.firest_card}です。"
-    puts 'ディーラーの引いた2枚目のカードはわかりません。'
+    puts "#{@dealer.name}の引いたカードは#{@dealer.firest_card}です。"
+    puts "#{@dealer.name}の引いた2枚目のカードはわかりません。"
   end
 
   # プレイヤーのターンを処理する
   def player_turn
     while @player.hand.score < 21
-      puts "あなたの現在の得点は#{@player.hand.score}です。カードを引きますか？（Y/N）"
+      puts "#{@player.name}の現在の得点は#{@player.hand.score}です。カードを引きますか？（Y/N）"
       input = player_input
       break if input == 'N'
 
@@ -67,17 +68,23 @@ class Game
   def draw_card_add_card_player_hand
     draw_card = @deck.draw_card
     @player.hand.add_card(draw_card)
-    puts "あなたの引いたカードは#{draw_card}です。"
+    puts "#{@player.name}の引いたカードは#{draw_card}です。"
   end
 
   # ディーラーのターンを処理する
   def dealer_turn
-    puts "ディーラーの引いた2枚目のカードは#{@dealer.second_card}でした。"
-    puts "ディーラーの現在の得点は#{@dealer.score}です"
-    while @dealer.hand.score < 17
+    puts "#{@dealer.name}の引いた2枚目のカードは#{@dealer.second_card}でした。"
+    puts "#{@dealer.name}の現在の得点は#{@dealer.score}です"
+    while @dealer.score < 17
       draw_card = @deck.draw_card
       @dealer.add_card(draw_card)
-      puts "ディーラーの引いたカードは#{draw_card}です。"
+      puts "#{@dealer.name}の引いたカードは#{draw_card}です。"
     end
+  end
+
+  # 好きな名前を入力できる様にする
+  def input_name
+    print 'お名前を入力してください: '
+    gets.chomp.to_s
   end
 end
