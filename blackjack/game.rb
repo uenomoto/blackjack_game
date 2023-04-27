@@ -5,31 +5,30 @@ class Game
   include Judge
   # 山札、プレイヤー、ディーラーの初期化
   def initialize
-    @deck = DeckOfCards.new
+    @deckofcards = DeckOfCards.new
     player_name = input_name # 初期化するたびにinput_nameメソッドが呼ばれる。
     @player = Player.new(name: player_name)
     @dealer = Dealer.new
   end
 
-  # ゲーム開始時、プレイヤーとディーラーが2枚ずつカードを引く,playで開始
   def start
-    2.times do
-      @player.hand.add_card(@deck.draw_card)
-      @dealer.add_card(@deck.draw_card)
-    end
-    play
-  end
-
-  private
-
-  # ここから他のクラスでは使わないかつ変更したらアプリが破壊するメソッド達なのでプライベートメソッドです。
-  def play
     puts 'ブラックジャックを開始します。'
+    draw_two_cards
     show_initial_cards
     player_turn
     dealer_turn
     result
     puts 'ブラックジャックを終了します。'
+  end
+
+  private
+
+  # ここから他のクラスでは使わないかつ変更したらアプリが破壊するメソッド達なのでプライベートメソッドです。
+  def draw_two_cards
+    2.times do
+      @player.hand.add_card(@deckofcards.draw_card)
+      @dealer.add_card(@deckofcards.draw_card)
+    end
   end
 
   # 初期カードを表示する
@@ -48,7 +47,7 @@ class Game
       input = player_input
       break if input == 'N'
 
-      draw_card_add_card_player_hand
+      draw_card
     end
   end
 
@@ -64,9 +63,9 @@ class Game
     input # 選択結果を返す
   end
 
-  # 読んで字の如く、ドローしたらプレイヤーの手札に追加するコードが書いてあるメソッド
-  def draw_card_add_card_player_hand
-    draw_card = @deck.draw_card
+  # ドローしたらプレイヤーの手札に追加するメソッド
+  def draw_card
+    draw_card = @deckofcards.draw_card
     @player.hand.add_card(draw_card)
     puts "#{@player.name}の引いたカードは#{draw_card}です。"
   end
@@ -76,7 +75,7 @@ class Game
     puts "#{@dealer.name}の引いた2枚目のカードは#{@dealer.second_card}でした。"
     puts "#{@dealer.name}の現在の得点は#{@dealer.score}です"
     while @dealer.score < 17
-      draw_card = @deck.draw_card
+      draw_card = @deckofcards.draw_card
       @dealer.add_card(draw_card)
       puts "#{@dealer.name}の引いたカードは#{draw_card}です。"
     end

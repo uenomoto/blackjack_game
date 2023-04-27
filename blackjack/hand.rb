@@ -21,7 +21,7 @@ class Hand
   end
 
   # 手札のカードを文字列に変換する、もし文字列にしないとオブジェクトIDになる,joinメソッドは指定した文字列をくり抜くイメージ
-  def to_s
+  def cards_to_s
     @cards.join(', ')
   end
 

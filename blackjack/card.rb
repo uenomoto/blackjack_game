@@ -10,7 +10,7 @@ class Card
     @number = number
   end
 
-  # to_sメソッドで文字列表現に変換
+  # オブジェクトIDになってしまうため文字列表現に変換
   def to_s
     "#{suit}の#{number}点"
   end
